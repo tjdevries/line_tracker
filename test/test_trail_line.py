@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 
 import pytest
+import os
 
 from git import Repo
-from line_tracker import (
+from line_tracker.line_tracker import (
         get_diff,
         get_diff_object,
         get_diff_text,
@@ -15,6 +16,22 @@ from line_tracker import (
 
 # TODO: Parameterize
 repo = Repo('/home/tj_chromebook/Git/vim-vertex/')
+
+
+@pytest.mark.incremental
+def setup_git_dir():
+    repo_dir = os.path.join('./', 'my-new-repo')
+    file_name = os.path.join(repo_dir, 'new-file')
+
+    r = Repo.init(repo_dir)
+    # This function just creates an empty file ...
+    open(file_name, 'wb').close()
+    r.index.add([file_name])
+    r.index.commit("initial commit")
+
+
+def teardown_git_dir():
+    pass
 
 
 # TODO: Parameterize this somewhere, or make it not dependent on my repo?
@@ -51,6 +68,7 @@ example_diff = [
      " while test $? == 0 ",
      ]
 
+
 class TestGetDiff:
     def test_get_diff_text(self):
         current_diff = get_diff(h1, h2, repo)
@@ -73,4 +91,3 @@ class TestFindDiffedLine:
         find = "echo 'Tracking line numbers through history'"
 
         assert(2 == find_diffed_line(find, '+', example_diff))
-
