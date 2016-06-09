@@ -1,5 +1,6 @@
 This is the first commit of this file.
 
-This is an example text line.
+Add a line above.
+This is a new example text line.
 
 Other stuff is down here.
