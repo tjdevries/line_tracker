@@ -1,6 +1,10 @@
 This is the first commit of this file.
 
+Let's add a lot of lines.
 Add a line above.
-This is a new example text line.
+This was another line added.
+This is an old example text line.
+This is the line below it now!
+Random!!~~! :D
 
 Other stuff is down here.
